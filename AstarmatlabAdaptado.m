@@ -55,7 +55,7 @@ MAP = gridI';
 for i=1:1:30
     for j=1:1:30
         if MAP(i,j) == -1
-            plot(i+.5,j+.5,'ks-','MarkerSize',12,'MarkerFaceColor','k');
+            plot(i-.5,j-.5,'ks-','MarkerSize',12,'MarkerFaceColor','k');
         end
     end
 end
@@ -70,12 +70,12 @@ xlabel('Please Select the Vehicle initial position ','Color','black');
 but=0;
 while (but ~= 1) %Repeat until the Left button is not clicked
     [xval,yval,but]=ginput(1);
-    xval=floor(xval);
-    yval=floor(yval);
+    xval=ceil(xval);
+    yval=ceil(yval);
 end
 xStart=xval;%Starting Position
 yStart=yval;%Starting Position
-plot(xval+.5,yval+.5,'bo');
+plot(xval-.5,yval-.5,'bo');
 start = [xStart,yStart];
 
 pause(1);
@@ -89,17 +89,12 @@ but=0;
 while (but ~= 1) %Repeat until the Left button is not clicked
     [xval,yval,but]=ginput(1);
 end
-xval=floor(xval);
-yval=floor(yval);
+xval=ceil(xval);
+yval=ceil(yval);
 xTarget=xval;%X Coordinate of the Target
 yTarget=yval;%Y Coordinate of the Target
-plot(xval+.5,yval+.5,'gd');
+plot(xval-.5,yval-.5,'gd');
 goal = [xTarget,yTarget];
- 
-
-
-
-
 
 gridI(goal(2),goal(1))=0;
 gridI(start(2),start(1))=1; 
@@ -108,11 +103,8 @@ MAP = gridI';
 xStart=start(1);%Starting Position
 yStart=start(2);%Starting Position
 
-
 xTarget=goal(1);%X Coordinate of the Target
 yTarget=goal(2);
-
-
 
 xval = xStart;
 yval = yStart; 
@@ -161,7 +153,7 @@ NoPath=1;
 % START ALGORITHM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 while((xNode ~= xTarget || yNode ~= yTarget) && NoPath == 1)
-%  plot(xNode+.5,yNode+.5,'go');
+%  plot(xNode-.5,yNode-.5,'go');
  exp_array=expand_array(xNode,yNode,path_cost,xTarget,yTarget,CLOSED,MAX_X,MAX_Y);
  exp_count=size(exp_array,1);
  %UPDATE LIST OPEN WITH THE SUCCESSOR NODES
@@ -243,14 +235,14 @@ if ( (xval == xTarget) && (yval == yTarget))
     end;
  j=size(Optimal_path,1);
  %Plot the Optimal Path!
- p=plot(Optimal_path(j,1)+.5,Optimal_path(j,2)+.5,'bo');
+ p=plot(Optimal_path(j,1)-.5,Optimal_path(j,2)-.5,'bo');
  j=j-1;
  for i=j:-1:1
   pause(.25);
-  set(p,'XData',Optimal_path(i,1)+.5,'YData',Optimal_path(i,2)+.5);
+  set(p,'XData',Optimal_path(i,1)-.5,'YData',Optimal_path(i,2)-.5);
  drawnow ;
  end;
- plot(Optimal_path(:,1)+.5,Optimal_path(:,2)+.5);
+ plot(Optimal_path(:,1)-.5,Optimal_path(:,2)-.5);
 else
  pause(1);
  h=msgbox('Sorry, No path exists to the Target!','warn');

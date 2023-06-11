@@ -12,7 +12,6 @@ tamArea = size(areas, 1);
 % Calcular tamanho total da área em centímetros
 tamTotal = tamQuadrado * tamArea;
 
-%Criar figura
 
 
 
@@ -60,6 +59,18 @@ tamTotal = tamQuadrado * tamArea;
     axis equal; xlabel('x [m]'); ylabel('y [m]');grid on;
     %title(['Tempo: t = ' num2str(t)])
     % grid de plot
+    %Criar figura
+x = 0:1:30;
+y = 0:1:30;
+hold on
+for n = 1:numel(x); %// loop over vertical lines
+    plot([x(n) x(n)], [y(1) y(end)], 'k-'); %// change 'k-' to whatever you need
+end
+hold on
+for n = 1:numel(y); %// loop over horizontal lines
+    plot([x(1) x(end)], [y(n) y(n)], 'k-'); %// change 'k-' to whatever you need
+end
+hold on;
 % Percorrer a matriz de áreas e plotar os quadrados coloridos
 for i = 1:tamArea
     for j = 1:tamArea
@@ -105,18 +116,7 @@ axis equal;
     % Plot roda direita
     fill(RoboDd(1,:) , RoboDd(2,:) , 'c')
     %-------------------------------------------------
-    x = 0:1:30;
-    y = 0:1:30;
-    hold on
-    for n = 1:numel(x); %// loop over vertical lines
-    plot([x(n) x(n)], [y(1) y(end)], 'k-'); %// change 'k-' to whatever you need
-    end
-    hold on
-    for n = 1:numel(y); %// loop over horizontal lines
-    plot([x(1) x(end)], [y(n) y(n)], 'k-'); %// change 'k-' to whatever you need
-    end
-    hold on;
-
+    
 %     plot(G(1),G(2),'--ro' ,'linewidth' , 2 ,'markersize' , 25);
     RoboCd = T2D(Rz2D(Corpod , Pd(3)) , Pd(1) , Pd(2));
     % Roda Esquerda do robô
@@ -132,7 +132,7 @@ axis equal;
     fill(RoboDd(1,:) , RoboDd(2,:) , 'y')
 
     % Histórico de posições: o 'rastro' do robô, por onde ele passou.
-    plot(Rd(1,:) , Rd(2,:) , 'b' , 'linewidth' , 3);
+    plot(Rd(1,:) , Rd(2,:) , 'b' , 'linewidth' , 1);
 
     % Posição atual do robô: onde ele está no momento atual 't'
 %     plot(Pd(1) , Pd(2) , 'or' , 'linewidth' , 2 , 'markersize' , 15)
